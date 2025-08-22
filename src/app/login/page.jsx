@@ -26,7 +26,7 @@ export default function LoginForm() {
 
             if (result.success) {
                 toast.success("Logged In successfully");
-                router.push("/");
+                router.push("/products");
                 router.refresh(); 
                 form.reset();
             } else {
