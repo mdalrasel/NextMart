@@ -1,25 +1,22 @@
-// src/app/products/[productId]/page.jsx
-
-import React from "react";
-import { FaArrowLeft } from "react-icons/fa";
-import Link from "next/link";
 import { ObjectId } from "mongodb";
 import dbConnect, { collectionNamesObj } from "@/lib/dbConnect";
+import { FaArrowLeft } from "react-icons/fa";
+import Link from "next/link";
 
 export default async function ProductDetailsPage({ params }) {
-  const { productId } =await  params;
+  const { productId } = params;
 
-  //  DB Connect
-  const productCollection = dbConnect(collectionNamesObj.productsCollection);
+  // ✅ MongoDB থেকে productsCollection নিয়ে আসা
+  const productCollection = await dbConnect(collectionNamesObj.productsCollection);
 
-  let product;
+  let product = null;
   try {
     product = await productCollection.findOne({ _id: new ObjectId(productId) });
   } catch (error) {
     console.error("Invalid ObjectId:", error);
-    product = null;
   }
 
+  // ❌ Product না পেলে
   if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center p-6 bg-base-100">
@@ -38,10 +35,11 @@ export default async function ProductDetailsPage({ params }) {
     );
   }
 
+  // ✅ Product Details Page
   return (
     <div className="min-h-screen bg-base-100 py-12 px-4 md:px-8">
       <div className="max-w-4xl mx-auto card bg-base-200 rounded-lg shadow-xl overflow-hidden">
-        {/* Product Image Section */}
+        {/* Product Image */}
         <div className="w-full">
           <img
             src={product.image}
@@ -50,25 +48,35 @@ export default async function ProductDetailsPage({ params }) {
           />
         </div>
 
-        {/* Product Details Section */}
+        {/* Product Details */}
         <div className="p-8 text-base-content">
           <h1 className="text-3xl font-extrabold mb-2">{product.title}</h1>
-          <span className="badge badge-lg badge-accent">{product.category}</span>
+          {product.category && (
+            <span className="badge badge-lg badge-accent">
+              {product.category}
+            </span>
+          )}
           <p className="mt-4 leading-relaxed text-base-content/80">
             {product.description}
           </p>
+
           <div className="mt-6">
             <p className="text-2xl font-bold text-primary">${product.price}</p>
-            <div className="flex items-center mt-2 text-base-content/80">
-              <span className="text-sm font-semibold mr-1">Brand:</span>
-              <span className="text-lg font-bold">{product.brand}</span>
-            </div>
-            <div className="flex items-center mt-2 text-base-content/80">
-              <span className="text-sm font-semibold mr-1">Rating:</span>
-              <span className="text-lg font-bold text-yellow-500">★</span>{" "}
-              {product.rating}
-            </div>
+            {product.brand && (
+              <div className="flex items-center mt-2 text-base-content/80">
+                <span className="text-sm font-semibold mr-1">Brand:</span>
+                <span className="text-lg font-bold">{product.brand}</span>
+              </div>
+            )}
+            {product.rating && (
+              <div className="flex items-center mt-2 text-base-content/80">
+                <span className="text-sm font-semibold mr-1">Rating:</span>
+                <span className="text-lg font-bold text-yellow-500">★</span>{" "}
+                {product.rating}
+              </div>
+            )}
           </div>
+
           <div className="mt-8 text-right">
             <Link href="/products" className="btn btn-primary">
               <FaArrowLeft /> Go Back
