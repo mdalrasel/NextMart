@@ -1,13 +1,47 @@
-import React from 'react';
+// src/app/components/Navbar.jsx
+"use client";
+
 import ThemeToggle from './ThemeToggle';
 import Link from 'next/link';
+import { useState } from 'react';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 const Navbar = () => {
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    const toggleDropdown = () => {
+      setIsDropdownOpen(!isDropdownOpen);
+    };
+
     const navMenu = <>
         <li><Link href={'/'}> Home </Link></li>
-        <li><Link href={'/services'}> Services </Link></li>
+        <li><Link href={'/products'}> Products </Link></li>
         <li><Link href={'/about'}> About </Link></li>
-        <li><Link href={'/dashboard'}> DashBoard </Link></li>
+         <li className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className=" flex items-center gap-2"
+              onClick={toggleDropdown}
+            >
+              Dashboard {isDropdownOpen ? <FaChevronUp /> : <FaChevronDown />}
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <Link href="/dashboard/add-product">
+                  <span className="font-semibold">Add New Product</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/my-products">
+                  <span className="font-semibold">My Products</span>
+                </Link>
+              </li>
+            </ul>
+          </li>
     </>
     return (
         <div className="navbar fixed z-50 bg-base-300 shadow-sm">
