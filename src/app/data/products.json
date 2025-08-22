@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1",
+    "title": "Apple iPhone 15 Pro Max",
+    "price": 1299,
+    "description": "Apple iPhone 15 Pro Max with A17 Pro chip, 6.7-inch Super Retina XDR display, and triple camera system.",
+    "image": "https://store.storeimages.cdn-apple.com/iphone15promax.jpg",
+    "category": "Smartphone",
+    "brand": "Apple",
+    "rating": 4.9
+  },
+  {
+    "id": "2",
+    "title": "Samsung Galaxy S24 Ultra",
+    "price": 1199,
+    "description": "Samsung Galaxy S24 Ultra with Snapdragon 8 Gen 3 processor, 200MP camera, and 5000mAh battery.",
+    "image": "https://images.samsung.com/galaxy-s24-ultra.jpg",
+    "category": "Smartphone",
+    "brand": "Samsung",
+    "rating": 4.8
+  },
+  {
+    "id": "3",
+    "title": "MacBook Pro 16 (M3 Max)",
+    "price": 3499,
+    "description": "Apple MacBook Pro 16-inch with M3 Max chip, 32-core GPU, 48GB unified memory, and 1TB SSD storage.",
+    "image": "https://store.storeimages.cdn-apple.com/macbookpro16.jpg",
+    "category": "Laptop",
+    "brand": "Apple",
+    "rating": 4.9
+  },
+  {
+    "id": "4",
+    "title": "Sony WH-1000XM5",
+    "price": 399,
+    "description": "Sony WH-1000XM5 wireless headphones with industry-leading noise cancellation and 30-hour battery life.",
+    "image": "https://sony.com/wh1000xm5.jpg",
+    "category": "Headphones",
+    "brand": "Sony",
+    "rating": 4.7
+  },
+  {
+    "id": "5",
+    "title": "Dell XPS 15",
+    "price": 2299,
+    "description": "Dell XPS 15 laptop with Intel i9 processor, RTX 4070 GPU, 32GB RAM, and 1TB SSD storage.",
+    "image": "https://dell.com/xps15.jpg",
+    "category": "Laptop",
+    "brand": "Dell",
+    "rating": 4.6
+  },
+  {
+    "id": "6",
+    "title": "Apple Watch Ultra 2",
+    "price": 799,
+    "description": "Apple Watch Ultra 2 with rugged titanium case, advanced fitness tracking, and 36-hour battery life.",
+    "image": "https://store.storeimages.cdn-apple.com/watch-ultra2.jpg",
+    "category": "Smartwatch",
+    "brand": "Apple",
+    "rating": 4.8
+  }
+]
