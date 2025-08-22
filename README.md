@@ -29,9 +29,8 @@ Authentication is handled securely using **NextAuth.js**.
 
 ---
 
-## 📦 Getting Started
 
-### 1️⃣ Clone the Repository
+##  Clone the Repository
 ```bash
 git clone https://github.com/mdalrasel/NextMart.git
 cd NextMart
@@ -56,7 +55,6 @@ NEXTAUTH_SECRET="<your-secret-key>"
 NEXTAUTH_URL="http://localhost:3000"
 
 #  Live Demo & Repository
-🌐 **Live Demo:** [https://next-mart-eight.vercel.app/]
+🌐 Live Demo: https://next-mart-eight.vercel.app/
 
-
-📂 **Repository:** [https://github.com/mdalrasel/NextMart]
+📂 Repository: https://github.com/mdalrasel/NextMart
