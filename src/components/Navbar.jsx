@@ -1,48 +1,61 @@
-// src/app/components/Navbar.jsx
-"use client";
+// src/components/Navbar.jsx
 
+import { getUserSession, logoutUser } from '@/app/actions/auth/loginUser';
 import ThemeToggle from './ThemeToggle';
 import Link from 'next/link';
-import { useState } from 'react';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaUserCircle } from 'react-icons/fa';
+import { RiLogoutBoxRLine } from "react-icons/ri";
 
-const Navbar = () => {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    const toggleDropdown = () => {
-      setIsDropdownOpen(!isDropdownOpen);
+export default async function Navbar() {
+    const user = await getUserSession();
+
+
+    const LogoutForm = () => {
+        return (
+            <form action={logoutUser}>
+                <button type="submit" className="flex items-center gap-2 w-full text-left">
+                    <RiLogoutBoxRLine size={20} />
+                    Logout
+                </button>
+            </form>
+        );
     };
 
-    const navMenu = <>
-        <li><Link href={'/'}> Home </Link></li>
-        <li><Link href={'/products'}> Products </Link></li>
-        <li><Link href={'/about'}> About </Link></li>
-         <li className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className=" flex items-center gap-2"
-              onClick={toggleDropdown}
-            >
-              Dashboard {isDropdownOpen ? <FaChevronUp /> : <FaChevronDown />}
-            </div>
-            <ul
-              tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <Link href="/dashboard/add-product">
-                  <span className="font-semibold">Add New Product</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/dashboard/my-products">
-                  <span className="font-semibold">My Products</span>
-                </Link>
-              </li>
-            </ul>
-          </li>
-    </>
+    const navMenu = (
+        <>
+            <li><Link href={'/'}>Home</Link></li>
+            <li><Link href={'/products'}>Products</Link></li>
+            <li><Link href={'/about'}>About</Link></li>
+            {user && (
+                <li className="dropdown dropdown-end">
+                    <div
+                        tabIndex={0}
+                        role="button"
+                        className="flex items-center gap-2"
+                    >
+                        Dashboard
+                    </div>
+                    <ul
+                        tabIndex={0}
+                        className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                    >
+                        <li>
+                            <Link href="/dashboard/add-product">
+                                <span className="font-semibold">Add New Product</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/dashboard/my-products">
+                                <span className="font-semibold">My Products</span>
+                            </Link>
+                        </li>
+                    </ul>
+                </li>
+            )}
+        </>
+    );
+
     return (
         <div className="navbar fixed z-50 bg-base-300 shadow-sm">
             <div className="navbar-start">
@@ -56,7 +69,7 @@ const Navbar = () => {
                         {navMenu}
                     </ul>
                 </div>
-                < Link href={"/"} className=" text-3xl font-black">NextMart</Link>
+                <Link href={"/"} className="text-3xl font-black">NextMart</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -65,10 +78,30 @@ const Navbar = () => {
             </div>
             <div className="navbar-end gap-2">
                 <ThemeToggle />
-                <a className="btn btn-primary">SignIn</a>
+                {user ? (
+                    <div className="dropdown dropdown-end">
+                        <div
+                            tabIndex={0}
+                            role="button"
+                            className="btn btn-ghost btn-circle avatar"
+                        >
+                            <div className="w-10 rounded-full">
+                                <FaUserCircle size={40} />
+                            </div>
+                        </div>
+                        <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                            <li>
+                                <span className="font-semibold">{user.name}</span>
+                            </li>
+                            <li>
+                                <LogoutForm />
+                            </li>
+                        </ul>
+                    </div>
+                ) : (
+                    <Link href={"/login"} className="btn btn-primary">SignIn</Link>
+                )}
             </div>
         </div>
     );
-};
-
-export default Navbar;
+}

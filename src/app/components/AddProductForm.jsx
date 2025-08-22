@@ -20,7 +20,6 @@ export default function AddProductForm() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
-  // ইনপুট ফিল্ডের ডেটা পরিবর্তন হলে স্টেট আপডেট করে
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -29,7 +28,7 @@ export default function AddProductForm() {
     }));
   };
 
-  // ফর্ম সাবমিট করার পর API তে ডেটা পাঠায়
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -37,7 +36,7 @@ export default function AddProductForm() {
     setSuccess(false);
 
     try {
-      // API Route এ POST রিকোয়েস্ট পাঠানো হচ্ছে
+  
       const response = await fetch("/api/products", {
         method: "POST",
         headers: {
@@ -54,7 +53,7 @@ export default function AddProductForm() {
       console.log("Product added successfully:", result);
       setSuccess(true);
 
-      // ফর্মের ফিল্ডগুলো খালি করা হচ্ছে
+     
       setFormData({
         title: "",
         price: "",
@@ -65,7 +64,7 @@ export default function AddProductForm() {
         rating: "",
       });
 
-      // সফলভাবে ডেটা যোগ করার পর Products পেজে নিয়ে যায়
+     
       router.push("/products");
     } catch (err) {
       console.error(err);

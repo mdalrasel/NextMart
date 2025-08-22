@@ -11,7 +11,7 @@ export default async function ProductsPage() {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {products.map((product) => (
-          <div key={product.id} className="card bg-base-100 shadow-xl">
+          <div key={product._id} className="card bg-base-100 shadow-xl">
             <figure>
               <img
                 src={product.image}
@@ -25,7 +25,7 @@ export default async function ProductsPage() {
               <p className="text-lg font-bold text-indigo-600">${product.price}</p>
 
               <div className="card-actions justify-end">
-                <Link href={`/products/${product.id}`}>
+                <Link href={`/products/${product._id}`}>
                   <button className="btn btn-primary flex items-center gap-2">
                     <FaInfoCircle /> Details
                   </button>
